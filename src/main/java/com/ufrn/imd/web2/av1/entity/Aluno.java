@@ -3,6 +3,8 @@ package com.ufrn.imd.web2.av1.entity;
 import com.ufrn.imd.web2.av1.enums.Genero;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +31,9 @@ public class Aluno {
     private String nome;
     private String cpf;
     private String curso;
-    private Genero genero;
     private Date dataNascimento;
     private boolean ativo;
+
+    @Enumerated(EnumType.STRING)
+    private Genero genero;
 }

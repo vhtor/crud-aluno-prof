@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,8 +33,8 @@ public class AlunoController {
                 .toList();
     }
 
-    @GetMapping("/{id}")
-    public AlunoDTO getById(@PathVariable("id") Long id) {
+    @GetMapping
+    public AlunoDTO getById(@RequestParam("id") Long id) {
         return AlunoDTO.of(alunoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Aluno (id: " + id + ") não encontrado"))
         );
