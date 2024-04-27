@@ -8,6 +8,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "alunos")
-@Builder
+@Builder(toBuilder = true)
 public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +33,11 @@ public class Aluno {
     private String nome;
     private String cpf;
     private String curso;
-    private Date dataNascimento;
     private boolean ativo;
 
     @Enumerated(EnumType.STRING)
     private Genero genero;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataNascimento;
 }

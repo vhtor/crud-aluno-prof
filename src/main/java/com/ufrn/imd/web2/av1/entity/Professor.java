@@ -1,10 +1,15 @@
 package com.ufrn.imd.web2.av1.entity;
 
 import com.ufrn.imd.web2.av1.enums.Genero;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,15 +27,20 @@ import java.util.Date;
 @Builder
 public class Professor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private Long matricula;
     private String nome;
     private String cpf;
-    private Genero genero;
     private String departamento;
     private String disciplinaAssociada;
-    private Date dataNascimento;
     private BigDecimal salario;
     private boolean ativo;
+
+    @Enumerated(EnumType.STRING)
+    private Genero genero;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataNascimento;
 }
