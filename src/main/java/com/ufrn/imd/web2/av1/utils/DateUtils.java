@@ -27,9 +27,17 @@ public class DateUtils {
     public static Date on(int day, int month, int year) {
         final var calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH, day);
-        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.MONTH, month + 1); // No Calendar, janeiro = 0
         calendar.set(Calendar.YEAR, year);
 
         return toStartOfDay(calendar.getTime());
+    }
+
+    public static Date plusDays(Date d, int days) {
+        final var calendar = Calendar.getInstance();
+        calendar.setTime(d);
+        calendar.add(Calendar.DAY_OF_MONTH, days);
+
+        return calendar.getTime();
     }
 }

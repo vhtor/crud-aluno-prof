@@ -80,7 +80,7 @@ public class ProfessorRequestValidator implements Validator {
             throw new DataValidationException("Data de nascimento é obrigatória");
         }
 
-        final var dataMinima = DateUtils.on(1, 0, 1900);
+        final var dataMinima = DateUtils.on(1, 1, 1900);
         final var dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
         if (dataNascimento.before(dataMinima)) {

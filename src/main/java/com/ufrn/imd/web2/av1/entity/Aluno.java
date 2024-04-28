@@ -15,6 +15,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -33,11 +34,10 @@ public class Aluno {
     private String nome;
     private String cpf;
     private String curso;
+    private Date dataNascimento;
     private boolean ativo;
 
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataNascimento;
 }

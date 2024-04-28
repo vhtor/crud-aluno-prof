@@ -35,7 +35,7 @@ public class AlunoRequestValidator implements Validator {
         }
     }
 
-    private void validateUpdate(AlunoRequest request) {
+    public void validateUpdate(AlunoRequest request) {
         if (ValidatorUtils.isNotEmpty(request.getNome())) {
             this.validarNome(request.getNome());
         }
@@ -61,7 +61,7 @@ public class AlunoRequestValidator implements Validator {
         }
     }
 
-    private void validateCreate(AlunoRequest request) {
+    public void validateCreate(AlunoRequest request) {
         this.validarNome(request.getNome());
         this.validarCpf(request.getCpf());
         this.validarCurso(request.getCurso());
@@ -70,13 +70,13 @@ public class AlunoRequestValidator implements Validator {
         this.validarMatricula(request.getMatricula());
     }
 
-    private void validarNome(String nome) {
+    public void validarNome(String nome) {
         if (ValidatorUtils.isEmpty(nome)) {
             throw new DataValidationException("Nome é obrigatório");
         }
     }
 
-    private void validarCpf(String cpf) {
+    public void validarCpf(String cpf) {
         if (ValidatorUtils.isEmpty(cpf)) {
             throw new DataValidationException("CPF é obrigatório");
         }
@@ -87,28 +87,28 @@ public class AlunoRequestValidator implements Validator {
         }
     }
 
-    private void validarCurso(String curso) {
+    public void validarCurso(String curso) {
         if (ValidatorUtils.isEmpty(curso)) {
             throw new DataValidationException("Curso é obrigatório");
         }
     }
 
-    private void validarGenero(Genero genero) {
+    public void validarGenero(Genero genero) {
         if (ValidatorUtils.isEmpty(genero)) {
             throw new DataValidationException("Gênero é obrigatório");
         }
 
-        if (genero != Genero.FEMININO && genero != Genero.MASCULINO) {
-            throw new DataValidationException("Gênero inválido. Valores aceitos: FEMININO, MASCULINO");
+        if (genero != Genero.FEMININO && genero != Genero.MASCULINO && genero != Genero.OUTRO) {
+            throw new DataValidationException("Gênero inválido. Valores aceitos: FEMININO, MASCULINO, OUTRO");
         }
     }
 
-    private void validarDataNascimento(Date dataNascimento) {
+    public void validarDataNascimento(Date dataNascimento) {
         if (ValidatorUtils.isEmpty(dataNascimento)) {
             throw new DataValidationException("Data de nascimento é obrigatória");
         }
 
-        final var dataMinima = DateUtils.on(1, 0, 1900);
+        final var dataMinima = DateUtils.on(1, 1, 1900);
         final var dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
         if (dataNascimento.before(dataMinima)) {
@@ -121,7 +121,7 @@ public class AlunoRequestValidator implements Validator {
         }
     }
 
-    private void validarMatricula(Long matricula) {
+    public void validarMatricula(Long matricula) {
         if (ValidatorUtils.isEmpty(matricula)) {
             throw new DataValidationException("Matrícula é obrigatória");
         }

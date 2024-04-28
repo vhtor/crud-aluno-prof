@@ -2,5 +2,5 @@ PUT http://localhost:8080/alunos/1
 Content-Type: application/json
 
 {
-  "genero": "MASCULINO"
+  "dataNascimento": "2024-04-28"
 }

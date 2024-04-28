@@ -36,11 +36,10 @@ public class Professor {
     private String departamento;
     private String disciplinaAssociada;
     private BigDecimal salario;
+    private Date dataNascimento;
     private boolean ativo;
 
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataNascimento;
 }
