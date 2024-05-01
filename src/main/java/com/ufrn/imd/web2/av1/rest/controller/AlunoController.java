@@ -32,8 +32,8 @@ public class AlunoController {
                 .toList();
     }
 
-    @GetMapping
-    public AlunoDTO getById(@RequestParam("id") Long id) {
+    @GetMapping("/{id}")
+    public AlunoDTO getById(@PathVariable("id") Long id) {
         final var aluno = this.alunoService.findAtivoById(id);
         return AlunoDTO.of(aluno);
     }

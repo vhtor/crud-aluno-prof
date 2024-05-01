@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -36,10 +37,66 @@ public class ProfessorRequestValidator implements Validator {
     }
 
     private void validateCreate(ProfessorRequest request) {
-        
+        validarMatricula(request.getMatricula());
+        validarNome(request.getNome());
+        validarCpf(request.getCpf());
+        validarDepartamento(request.getDepartamento());
+        validarDisciplinaAssociada(request.getDisciplinaAssociada());
+        validarGenero(request.getGenero());
+        validarDataNascimento(request.getDataNascimento());
+        validarSalario(request.getSalario());
     }
 
     private void validateUpdate(ProfessorRequest request) {
+        if (ValidatorUtils.isNotEmpty(request.getNome())) {
+            this.validarNome(request.getNome());
+        }
+
+        if (ValidatorUtils.isNotEmpty(request.getCpf())) {
+            this.validarCpf(request.getCpf());
+        }
+
+        if (ValidatorUtils.isNotEmpty(request.getDepartamento())) {
+            this.validarDepartamento(request.getDepartamento());
+        }
+
+        if (ValidatorUtils.isNotEmpty(request.getDisciplinaAssociada())) {
+            this.validarDisciplinaAssociada(request.getDisciplinaAssociada());
+        }
+
+        if (ValidatorUtils.isNotEmpty(request.getGenero())) {
+            this.validarGenero(request.getGenero());
+        }
+
+        if (ValidatorUtils.isNotEmpty(request.getDataNascimento())) {
+            this.validarDataNascimento(request.getDataNascimento());
+        }
+
+        if (ValidatorUtils.isNotEmpty(request.getMatricula())) {
+            this.validarMatricula(request.getMatricula());
+        }
+
+        if (ValidatorUtils.isNotEmpty(request.getSalario())) {
+            this.validarSalario(request.getSalario());
+        }
+    }
+
+    private void validarMatricula(Long matricula) {
+        if (ValidatorUtils.isEmpty(matricula)) {
+            throw new DataValidationException("Matrícula é obrigatória");
+        }
+
+
+        final var professorByMatricula = service.findByMatricula(matricula);
+        if (professorByMatricula.isPresent()) {
+            if (this.context.equals(Context.UPDATE)
+                    && !Objects.equals(professorByMatricula.get().getId(), this.professor.getId())) {
+                throw new DataValidationException("Já existe um professor(a) com esta matrícula cadastrada");
+            }
+
+            throw new DataValidationException("Já existe um professor(a) com esta matrícula cadastrada");
+        }
+
     }
 
     private void validarNome(String nome) {
@@ -54,14 +111,25 @@ public class ProfessorRequestValidator implements Validator {
         }
 
         final var professorByCpf = service.findByCpf(cpf);
-        if (professorByCpf.isPresent() && !Objects.equals(professorByCpf.get().getId(), professor.getId())) {
+        if (professorByCpf.isPresent()) {
+            if (this.context.equals(Context.UPDATE)
+                    && !Objects.equals(professorByCpf.get().getId(), this.professor.getId())) {
+                throw new DataValidationException("Já existe um professor(a) com este CPF cadastrado");
+            }
+
             throw new DataValidationException("Já existe um professor(a) com este CPF cadastrado");
         }
     }
 
-    private void validarCurso(String curso) {
-        if (ValidatorUtils.isEmpty(curso)) {
-            throw new DataValidationException("Curso é obrigatório");
+    private void validarDepartamento(String departamento) {
+        if (ValidatorUtils.isEmpty(departamento)) {
+            throw new DataValidationException("Departamento é obrigatório");
+        }
+    }
+
+    private void validarDisciplinaAssociada(String disciplinaAssociada) {
+        if (ValidatorUtils.isEmpty(disciplinaAssociada)) {
+            throw new DataValidationException("Disciplina associada é obrigatória");
         }
     }
 
@@ -93,14 +161,9 @@ public class ProfessorRequestValidator implements Validator {
         }
     }
 
-    private void validarMatricula(Long matricula) {
-        if (ValidatorUtils.isEmpty(matricula)) {
-            throw new DataValidationException("Matrícula é obrigatória");
-        }
-
-        final var professorByMatricula = service.findByMatricula(matricula);
-        if (professorByMatricula.isPresent() && !Objects.equals(professorByMatricula.get().getId(), professor.getId())) {
-            throw new DataValidationException("Já existe um professor(a) com esta matrícula cadastrada");
+    private void validarSalario(BigDecimal salario) {
+        if (ValidatorUtils.isEmpty(salario)) {
+            throw new DataValidationException("Salário é obrigatório");
         }
     }
 }

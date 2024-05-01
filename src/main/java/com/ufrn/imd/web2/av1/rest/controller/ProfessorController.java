@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/professores")
 public class ProfessorController {
     private final ProfessorService professorService;
     private final ProfessorRepository professorRepository;
@@ -29,8 +31,8 @@ public class ProfessorController {
                 .toList();
     }
 
-    @GetMapping
-    public ProfessorDTO getById(Long id) {
+    @GetMapping("/{id}")
+    public ProfessorDTO getById(@PathVariable("id") Long id) {
         final var professor = this.professorService.findAtivoById(id);
         return ProfessorDTO.of(professor);
     }
@@ -43,7 +45,7 @@ public class ProfessorController {
 
     @PutMapping("/{id}")
     @Transactional
-    public void update(Long id, @RequestBody ProfessorRequest request) {
+    public void update(@PathVariable("id") Long id, @RequestBody ProfessorRequest request) {
         request.setId(id);
         this.professorService.update(request);
     }

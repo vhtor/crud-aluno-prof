@@ -60,7 +60,7 @@ public class ProfessorService {
     }
 
     public Optional<Professor> findByMatricula(Long matricula) {
-        return this.professorRepository.findByMatricula(matricula);
+        return this.professorRepository.findByMatriculaAndAtivoIsTrue(matricula);
     }
 
     public Optional<Professor> findByCpf(String cpf) {

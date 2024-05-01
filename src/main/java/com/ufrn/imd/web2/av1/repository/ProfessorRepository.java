@@ -11,7 +11,7 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
     Collection<Professor> findAllByAtivoTrue();
 
-    Optional<Professor> findByMatricula(Long matricula);
+    Optional<Professor> findByMatriculaAndAtivoIsTrue(Long matricula);
 
     Optional<Professor> findByCpf(String cpf);
 }

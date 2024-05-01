@@ -40,6 +40,7 @@ public class ProfessorDTO {
                 .salario(entity.getSalario())
                 .genero(entity.getGenero())
                 .dataNascimento(entity.getDataNascimento())
+                .ativo(entity.isAtivo())
                 .build();
     }
 }

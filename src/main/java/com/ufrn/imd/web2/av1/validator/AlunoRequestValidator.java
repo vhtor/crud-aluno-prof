@@ -82,7 +82,11 @@ public class AlunoRequestValidator implements Validator {
         }
 
         final var alunoByCpf = service.findByCpf(cpf);
-        if (alunoByCpf.isPresent() && !Objects.equals(alunoByCpf.get().getId(), aluno.getId())) {
+        if (alunoByCpf.isPresent()) {
+            if (this.context.equals(Context.UPDATE) && !Objects.equals(alunoByCpf.get().getId(), aluno.getId())) {
+                throw new DataValidationException("Já existe um aluno(a) com este CPF cadastrado");
+            }
+
             throw new DataValidationException("Já existe um aluno(a) com este CPF cadastrado");
         }
     }
@@ -127,7 +131,11 @@ public class AlunoRequestValidator implements Validator {
         }
 
         final var alunoByMatricula = service.findByMatricula(matricula);
-        if (alunoByMatricula.isPresent() && !Objects.equals(alunoByMatricula.get().getId(), aluno.getId())) {
+        if (alunoByMatricula.isPresent()) {
+            if (this.context.equals(Context.UPDATE) && !Objects.equals(alunoByMatricula.get().getId(), aluno.getId())) {
+                throw new DataValidationException("Já existe um aluno(a) com esta matrícula cadastrada");
+            }
+
             throw new DataValidationException("Já existe um aluno(a) com esta matrícula cadastrada");
         }
     }

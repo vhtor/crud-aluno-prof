@@ -49,7 +49,7 @@ public class ProfessorRequest {
                 .salario(salario)
                 .genero(genero)
                 .dataNascimento(dataNascimento)
-                .ativo(ativo)
+                .ativo(Boolean.TRUE)
                 .build();
     }
 
