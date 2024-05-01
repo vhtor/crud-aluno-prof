@@ -2,10 +2,10 @@ POST http://localhost:8080/alunos
 Content-Type: application/json
 
 {
-  "matricula": 20240002,
-  "nome": "Carla Dalila",
-  "cpf": "123.456.789-00",
-  "curso": "Medicina",
-  "genero": "FEMININO",
+  "matricula": 20240001,
+  "nome": "Victor Hugo Farias",
+  "cpf": "123.456.789-01",
+  "curso": "Bacharelado em Tecnologia da Informação",
+  "genero": "MASCULINO",
   "dataNascimento": "2024-04-27"
 }

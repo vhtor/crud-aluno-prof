@@ -46,6 +46,7 @@ public class AlunoRequest {
                 .curso(curso)
                 .genero(genero)
                 .dataNascimento(dataNascimento)
+                .ativo(true)
                 .build();
     }
 
