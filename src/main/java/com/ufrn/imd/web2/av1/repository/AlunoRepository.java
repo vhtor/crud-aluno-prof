@@ -14,4 +14,6 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     Optional<Aluno> findByIdAndAtivoIsTrue(Long id);
 
     Collection<Aluno> findAllByAtivoTrue();
+
+    Collection<Aluno> findAllByIdInAndAtivoIsTrue(Collection<Long> alunoIds);
 }

@@ -55,6 +55,10 @@ public class AlunoService {
                 .orElseThrow(() -> new ResourceNotFoundException("Aluno (id: " + id + ") não encontrado"));
     }
 
+    public Collection<Aluno> findAllByIds(Collection<Long> alunoIds) {
+        return this.alunoRepository.findAllByIdInAndAtivoIsTrue(alunoIds);
+    }
+
     public Collection<Aluno> findAllAtivos() {
         return this.alunoRepository.findAllByAtivoTrue();
     }

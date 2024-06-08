@@ -39,20 +39,17 @@ public class AlunoController {
     }
 
     @PostMapping
-    @Transactional
     public void save(@RequestBody AlunoRequest request) {
         this.alunoService.create(request);
     }
 
     @PutMapping("/{id}")
-    @Transactional
     public void update(@PathVariable("id") Long id, @RequestBody AlunoRequest request) {
         request.setId(id);
         this.alunoService.update(request);
     }
 
     @PutMapping("/restore/{id}")
-    @Transactional
     public void restore(@PathVariable("id") Long id) {
         final var aluno = this.alunoService.findById(id);
 
@@ -61,13 +58,11 @@ public class AlunoController {
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
     public void delete(@PathVariable("id") Long id) {
         alunoRepository.deleteById(id);
     }
 
     @DeleteMapping("/logic/{id}")
-    @Transactional
     public void deleteLogic(@PathVariable("id") Long id) {
         var aluno = alunoRepository.getReferenceById(id);
 

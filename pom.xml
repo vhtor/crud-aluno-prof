@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ufrn.imd.web2</groupId>
-	<artifactId>av1</artifactId>
+	<artifactId>av2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>av1</name>
 	<description>Projeto Avaliação da Unidade I de Web II</description>

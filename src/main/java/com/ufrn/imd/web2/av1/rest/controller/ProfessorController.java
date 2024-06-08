@@ -5,7 +5,6 @@ import com.ufrn.imd.web2.av1.repository.ProfessorRepository;
 import com.ufrn.imd.web2.av1.rest.request.ProfessorRequest;
 import com.ufrn.imd.web2.av1.service.ProfessorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,20 +37,17 @@ public class ProfessorController {
     }
 
     @PostMapping
-    @Transactional
     public void save(@RequestBody ProfessorRequest request) {
         this.professorService.create(request);
     }
 
     @PutMapping("/{id}")
-    @Transactional
     public void update(@PathVariable("id") Long id, @RequestBody ProfessorRequest request) {
         request.setId(id);
         this.professorService.update(request);
     }
 
     @PutMapping("/restore/{id}")
-    @Transactional
     public void restore(Long id) {
         final var professor = this.professorService.findById(id);
 
@@ -60,7 +56,6 @@ public class ProfessorController {
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
     public void delete(@PathVariable("id") Long id) {
         final var professor = this.professorService.findById(id);
 
@@ -68,7 +63,6 @@ public class ProfessorController {
     }
 
     @DeleteMapping("/logic/{id}")
-    @Transactional
     public void deleteLogic(@PathVariable("id") Long id) {
         final var professor = this.professorService.findAtivoById(id);
 
