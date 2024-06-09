@@ -1,0 +1,7 @@
+PUT http://localhost:8080/turmas/9
+Content-Type: application/json
+
+{
+  "nome": "Calculo I",
+  "codigo": "2024000002"
+}

@@ -28,13 +28,7 @@ public class TurmaRequest {
                 .codigo(this.codigo)
                 .professor(professor)
                 .alunos(alunos)
-                .build();
-    }
-
-    public Turma toEntityUpdate(Turma turma) {
-        return turma.toBuilder()
-                .nome(this.nome)
-                .codigo(this.codigo)
+                .ativo(true)
                 .build();
     }
 }

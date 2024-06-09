@@ -10,4 +10,6 @@ public interface TurmaRepository extends JpaRepository<Turma, Long> {
     Optional<Turma> findByIdAndAtivoTrue(Long id);
 
     Collection<Turma> findAllByAtivoTrue();
+
+    Optional<Turma> findByNomeIgnoreCaseAndCodigoIgnoreCaseAndAtivoTrue(String nome, String codigo);
 }

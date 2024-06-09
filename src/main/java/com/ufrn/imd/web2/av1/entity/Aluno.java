@@ -9,6 +9,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +25,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "alunos")
+@Entity(name = "aluno")
 @Builder(toBuilder = true)
 public class Aluno {
     @Id
@@ -41,5 +43,10 @@ public class Aluno {
     private Genero genero;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "aluno_turma",
+            joinColumns = @JoinColumn(name = "aluno_id"),
+            inverseJoinColumns = @JoinColumn(name = "turma_id")
+    )
     private Collection<Turma> turmas;
 }

@@ -7,8 +7,10 @@ import com.ufrn.imd.web2.av1.service.TurmaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,24 +31,24 @@ public class TurmaController {
     }
 
     @GetMapping("/{id}")
-    public TurmaDTO getById(Long id) {
+    public TurmaDTO getById(@PathVariable("id") Long id) {
         final var turma = this.turmaService.findAtivaById(id);
         return TurmaDTO.of(turma);
     }
 
     @PostMapping
-    public void save(TurmaRequest request) {
+    public void save(@RequestBody TurmaRequest request) {
         this.turmaService.create(request);
     }
 
     @PutMapping("/{id}")
-    public void update(Long id, TurmaRequest request) {
+    public void update(@PathVariable("id") Long id, @RequestBody TurmaRequest request) {
         request.setId(id);
         this.turmaService.update(request);
     }
 
     @PutMapping("/restore/{id}")
-    public void restore(Long id) {
+    public void restore(@PathVariable("id") Long id) {
         final var turma = this.turmaService.findById(id);
 
         turma.setAtivo(true);
@@ -54,14 +56,14 @@ public class TurmaController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(Long id) {
+    public void delete(@PathVariable("id") Long id) {
         final var turma = this.turmaService.findById(id);
 
         turmaRepository.delete(turma);
     }
 
     @DeleteMapping("/logic/{id}")
-    public void deleteLogic(Long id) {
+    public void deleteLogic(@PathVariable("id") Long id) {
         final var turma = this.turmaService.findById(id);
 
         turma.setAtivo(false);

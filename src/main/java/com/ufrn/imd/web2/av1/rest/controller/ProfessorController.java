@@ -48,7 +48,7 @@ public class ProfessorController {
     }
 
     @PutMapping("/restore/{id}")
-    public void restore(Long id) {
+    public void restore(@PathVariable("id") Long id) {
         final var professor = this.professorService.findById(id);
 
         professor.setAtivo(true);

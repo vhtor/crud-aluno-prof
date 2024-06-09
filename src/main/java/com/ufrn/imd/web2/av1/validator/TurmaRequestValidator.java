@@ -36,6 +36,15 @@ public class TurmaRequestValidator implements Validator {
         validarCodigo(request.getCodigo());
         validarProfessor(request.getProfessorId());
         validarAlunos(request.getAlunoIds());
+        validarExistente(request.getNome(), request.getCodigo());
+    }
+
+    private void validarExistente(String nome, String codigo) {
+        final var turmaByNomeAndCodigo = this.service.findByNomeAndCodigo(nome, codigo);
+
+        if (ValidatorUtils.isNotEmpty(turmaByNomeAndCodigo)) {
+            throw new DataValidationException("Já existe uma turma com o nome e código informados");
+        }
     }
 
     private void validateUpdate(TurmaRequest request) {
@@ -54,12 +63,18 @@ public class TurmaRequestValidator implements Validator {
         if (ValidatorUtils.isNotEmpty(request.getAlunoIds())) {
             this.validarAlunos(request.getAlunoIds());
         }
+
+        if (ValidatorUtils.isNotEmpty(request.getNome()) && ValidatorUtils.isNotEmpty(request.getCodigo())) {
+            validarExistente(request.getNome(), request.getCodigo());
+        }
     }
 
     private void validarNome(String nome) {
         if (ValidatorUtils.isEmpty(nome)) {
-            throw new DataValidationException("Nome é obrigatório");
+            throw new DataValidationException("O nome da turma é obrigatório");
         }
+
+
     }
 
     private void validarCodigo(String codigo) {

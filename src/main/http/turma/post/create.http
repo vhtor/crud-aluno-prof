@@ -1,0 +1,9 @@
+POST http://localhost:8080/turmas
+Content-Type: application/json
+
+{
+  "nome": "Evolução I",
+  "codigo": "2024000001",
+  "professorId": 3,
+  "alunoIds": [2, 3]
+}

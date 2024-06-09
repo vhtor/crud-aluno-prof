@@ -23,7 +23,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "professores")
+@Entity(name = "professor")
 @Builder
 public class Professor {
     @Id
